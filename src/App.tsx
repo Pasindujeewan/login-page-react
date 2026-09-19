@@ -1,8 +1,11 @@
+import LoginPage from "./pages/LoginPage";
+import ThemeProvider from "./providers/ThemeProvider";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Login Page</h1>
-    </div>
+    <ThemeProvider>
+      <LoginPage />
+    </ThemeProvider>
   );
 }
 
