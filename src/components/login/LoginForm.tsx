@@ -6,17 +6,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { VisibilityOff } from "@mui/icons-material";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
 import SocialLoginButtons from "./SocialLoginButtons";
+import { useState } from "react";
 
 //LoginForm component that renders the login form with username and password fields, a login button, and a link to register
 const LoginForm = () => {
+  //this state for password visibility
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
-    <Box
-      sx={{
-        p: 1,
-      }}
-    >
+    <Box>
       <TextField
         fullWidth
         placeholder="Username"
@@ -26,6 +26,13 @@ const LoginForm = () => {
           mb: 2,
           "& .MuiOutlinedInput-root": {
             borderRadius: 5,
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 2,
+            },
+          },
+          "& .MuiOutlinedInput-input": {
+            fontSize: "14px",
+            padding: "13px 20px",
           },
         }}
       />
@@ -33,20 +40,39 @@ const LoginForm = () => {
       <TextField
         fullWidth
         placeholder="Password"
-        type="password"
+        type={showPassword ? "text" : "password"}
         variant="outlined"
         size="small"
         sx={{
           "& .MuiOutlinedInput-root": {
             borderRadius: 5,
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderWidth: 2,
+            },
+          },
+          "& .MuiOutlinedInput-input": {
+            fontSize: "14px",
+            padding: "13px 20px",
           },
         }}
         slotProps={{
           input: {
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton edge="end">
-                  <VisibilityOff fontSize="small" />
+                <IconButton
+                  edge="end"
+                  sx={{
+                    mr: 0.1,
+                  }}
+                  onClick={() => {
+                    setShowPassword((prev) => !prev);
+                  }}
+                >
+                  {showPassword ? (
+                    <Visibility fontSize="small" />
+                  ) : (
+                    <VisibilityOff fontSize="small" />
+                  )}
                 </IconButton>
               </InputAdornment>
             ),
@@ -66,7 +92,7 @@ const LoginForm = () => {
           sx={{
             fontSize: 11,
             cursor: "pointer",
-            color: "text.secondary",
+            color: "text.primary",
           }}
         >
           Forgot Password?
@@ -77,7 +103,7 @@ const LoginForm = () => {
         fullWidth
         variant="contained"
         sx={{
-          backgroundColor: "#000",
+          backgroundColor: "primary.main",
           color: "#fff",
           borderRadius: 5,
           py: 1,
@@ -119,7 +145,7 @@ const LoginForm = () => {
         <Box
           component="span"
           sx={{
-            color: "#6d9368",
+            color: "secondary.main",
             fontWeight: 600,
             cursor: "pointer",
           }}

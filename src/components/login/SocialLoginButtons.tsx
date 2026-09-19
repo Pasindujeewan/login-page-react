@@ -5,7 +5,7 @@ const SocialLoginButtons = () => {
   const buttonStyle = {
     width: 38,
     height: 38,
-    backgroundColor: "#000",
+    backgroundColor: "primary.main",
     color: "#fff",
     "&:hover": {
       backgroundColor: "#222",

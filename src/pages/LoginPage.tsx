@@ -11,7 +11,7 @@ const LoginPage = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        p: { xs: 2, md: 4 },
+        px: { xs: 3, md: 4 },
       }}
     >
       <Box
@@ -34,7 +34,7 @@ const LoginPage = () => {
           <Typography
             variant="h3"
             sx={{
-              fontWeight: 700,
+              fontWeight: 600,
               textAlign: "center",
               mb: 1,
               fontSize: { xs: "2rem", md: "2.5rem" },
@@ -45,15 +45,27 @@ const LoginPage = () => {
 
           <Typography
             sx={{
+              fontWeight: 300,
               textAlign: "center",
               color: "text.secondary",
-              fontSize: 13,
+              fontSize: 14,
               mb: 4,
             }}
           >
             Simplify your workflow and boost your productivity
             <br />
-            with <b>Tuga's App.</b> Get started for free.
+            with{" "}
+            <Typography
+              component="b"
+              sx={{
+                fontSize: "15px",
+                fontWeight: 700,
+                color: "primary.secondary",
+              }}
+            >
+              Tuga's App.
+            </Typography>{" "}
+            Get started for free.
           </Typography>
 
           <LoginForm />
@@ -64,7 +76,7 @@ const LoginPage = () => {
             display: { xs: "none", md: "flex" },
             minHeight: 600,
             borderRadius: 4,
-            backgroundColor: "#f4f8f2",
+            backgroundColor: "#f6faf3",
             alignItems: "center",
             justifyContent: "center",
             p: 4,
