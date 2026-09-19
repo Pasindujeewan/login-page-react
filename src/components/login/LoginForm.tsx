@@ -15,106 +15,157 @@ const LoginForm = () => {
   //this state for password visibility
   const [showPassword, setShowPassword] = useState(false);
 
+  // this states for input validation
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  // this state for keep errors
+  const [errors, setErrors] = useState({
+    userName: "",
+    password: "",
+  });
+
+  // this function validate and check  email and password not empty
+  const validateForm = () => {
+    const newErrors = {
+      userName: "",
+      password: "",
+    };
+    if (!userName.trim()) {
+      newErrors.userName = "Username is required";
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+
+    return !newErrors.userName && !newErrors.password;
+  };
+
+  // handle form submit data by calling validateform
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+    //Now Just console log later add toast
+    console.log("Form is valid");
+  };
+
   return (
     <Box>
-      <TextField
-        fullWidth
-        placeholder="Username"
-        variant="outlined"
-        size="small"
-        sx={{
-          mb: 2,
-          "& .MuiOutlinedInput-root": {
-            borderRadius: 5,
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderWidth: 2,
-            },
-          },
-          "& .MuiOutlinedInput-input": {
-            fontSize: "14px",
-            padding: "13px 20px",
-          },
-        }}
-      />
-
-      <TextField
-        fullWidth
-        placeholder="Password"
-        type={showPassword ? "text" : "password"}
-        variant="outlined"
-        size="small"
-        sx={{
-          "& .MuiOutlinedInput-root": {
-            borderRadius: 5,
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderWidth: 2,
-            },
-          },
-          "& .MuiOutlinedInput-input": {
-            fontSize: "14px",
-            padding: "13px 20px",
-          },
-        }}
-        slotProps={{
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  edge="end"
-                  sx={{
-                    mr: 0.1,
-                  }}
-                  onClick={() => {
-                    setShowPassword((prev) => !prev);
-                  }}
-                >
-                  {showPassword ? (
-                    <Visibility fontSize="small" />
-                  ) : (
-                    <VisibilityOff fontSize="small" />
-                  )}
-                </IconButton>
-              </InputAdornment>
-            ),
-          },
-        }}
-      />
-
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          mt: 1,
-          mb: 2,
-        }}
-      >
-        <Typography
+      <form onSubmit={handleSubmit}>
+        <TextField
+          fullWidth
+          placeholder="Username"
+          variant="outlined"
+          value={userName}
+          onChange={(event) => setUserName(event.target.value)}
+          error={Boolean(errors.userName)}
+          helperText={errors.userName}
+          size="small"
           sx={{
-            fontSize: 11,
-            cursor: "pointer",
-            color: "text.primary",
+            mb: 2,
+            "& .MuiOutlinedInput-root": {
+              borderRadius: 5,
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderWidth: 2,
+              },
+            },
+            "& .MuiOutlinedInput-input": {
+              fontSize: "14px",
+              padding: "13px 20px",
+            },
+          }}
+        />
+
+        <TextField
+          fullWidth
+          placeholder="Password"
+          type={showPassword ? "text" : "password"}
+          variant="outlined"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          error={Boolean(errors.password)}
+          helperText={errors.password}
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              borderRadius: 5,
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderWidth: 2,
+              },
+            },
+            "& .MuiOutlinedInput-input": {
+              fontSize: "14px",
+              padding: "13px 20px",
+            },
+          }}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    edge="end"
+                    sx={{
+                      mr: 0.1,
+                    }}
+                    onClick={() => {
+                      setShowPassword((prev) => !prev);
+                    }}
+                  >
+                    {showPassword ? (
+                      <Visibility fontSize="small" />
+                    ) : (
+                      <VisibilityOff fontSize="small" />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            mt: 1,
+            mb: 2,
           }}
         >
-          Forgot Password?
-        </Typography>
-      </Box>
+          <Typography
+            sx={{
+              fontSize: 11,
+              cursor: "pointer",
+              color: "text.primary",
+            }}
+          >
+            Forgot Password?
+          </Typography>
+        </Box>
 
-      <Button
-        fullWidth
-        variant="contained"
-        sx={{
-          backgroundColor: "primary.main",
-          color: "#fff",
-          borderRadius: 5,
-          py: 1,
-          textTransform: "none",
-          "&:hover": {
-            backgroundColor: "#222",
-          },
-        }}
-      >
-        Login
-      </Button>
+        <Button
+          fullWidth
+          variant="contained"
+          type="submit"
+          sx={{
+            backgroundColor: "primary.main",
+            color: "#fff",
+            borderRadius: 5,
+            py: 1,
+            textTransform: "none",
+            "&:hover": {
+              backgroundColor: "#222",
+            },
+          }}
+        >
+          Login
+        </Button>
+      </form>
 
       <Box
         sx={{
