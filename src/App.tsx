@@ -1,10 +1,11 @@
-import LoginPage from "./pages/LoginPage";
 import ThemeProvider from "./providers/ThemeProvider";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/AppRoutes";
 
 function App() {
   return (
     <ThemeProvider>
-      <LoginPage />
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
